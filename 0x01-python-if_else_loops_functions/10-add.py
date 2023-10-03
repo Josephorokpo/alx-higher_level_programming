@@ -2,4 +2,5 @@
 
 def add(a, b):
     result = a + b
-    print(result)
+    print(result, end="")
+    return result
