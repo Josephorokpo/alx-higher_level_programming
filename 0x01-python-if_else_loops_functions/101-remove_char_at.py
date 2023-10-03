@@ -3,5 +3,4 @@
 def remove_char_at(str, n):
     if n < 0:
         return str
-        result = (str[:n] + str[n+1:])
-        return result
+    return str[:n] + str[n+1:]
