@@ -13,4 +13,4 @@ def divisible_by_2(my_list=[]):
             new_list.append(False)
 
     # Return the list of True/False values
-    return new_list
+    return (new_list)
