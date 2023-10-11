@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 def weight_average(my_list=[]):
     if not my_list:
         return 0
@@ -12,3 +11,5 @@ def weight_average(my_list=[]):
 
     if total_weight == 0:
         return 0
+
+    return total_weighted_sum / total_weight
