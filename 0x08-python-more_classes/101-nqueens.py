@@ -1,28 +1,36 @@
 #!/usr/bin/python3
+"""N queens puzzle is the challenge"""
+
 
 import sys
 
 
 def is_safe(board, row, col, n):
-    """Check if it's safe to place a queen in the given position.
+    """
+    Check if it's safe to place a queen at a specific position \
+            (row, col) on the chessboard.
 
     Args:
-        board (list): The current chessboard state.
-        row (int): The row to check.
-        col (int): The column to check.
+        board (list): The current state of the chessboard.
+        row (int): The row where we want to place the queen.
+        col (int): The column where we want to place the queen.
         n (int): The size of the chessboard.
 
     Returns:
-        bool: True if it's safe to place a queen, otherwise False.
+        bool: True if it's safe to place a queen at the given position, \
+                False otherwise.
     """
+    # Check the column on the left
     for i in range(col):
         if board[row][i] == 1:
             return False
 
+    # Check upper-left diagonal
     for i, j in zip(range(row, -1, -1), range(col, -1, -1)):
         if board[i][j] == 1:
             return False
 
+    # Check lower-left diagonal
     for i, j in zip(range(row, n, 1), range(col, -1, -1)):
         if board[i][j] == 1:
             return False
@@ -31,58 +39,62 @@ def is_safe(board, row, col, n):
 
 
 def solve_nqueens(n):
-    """Solve the N-queens puzzle for a given board size.
+    """
+    Solve the N-Queens problem for a chessboard of size N.
 
     Args:
         n (int): The size of the chessboard.
 
     Returns:
-        list: A list of solutions, each represented as a list \
-                of queen positions.
+        list: A list of solutions, where each solution is a list of \
+                (row, column) positions for queens.
     """
-    board = [[0 for _ in range(n)] for _ in range(n)]
-    solutions = []
+    if n < 4:
+        return []
 
-    def solve(col):
+    def solve(board, col):
         if col == n:
-            solution = []
-            for row in board:
-                solution.append([i, row.index(1)])
-            solutions.append(solution)
+            solutions.append([[i, row] for i, row in enumerate(board)])
             return
 
         for i in range(n):
             if is_safe(board, i, col, n):
                 board[i][col] = 1
-                solve(col + 1)
+                solve(board, col + 1)
                 board[i][col] = 0
 
-    solve(0)
+    solutions = []
+    solve([[0] * n for _ in range(n)], 0)
     return solutions
 
 
-def main():
-    """Main function to handle command-line input and display solutions."""
-    if len(sys.argv) != 2:
-        print("Usage: nqueens N")
-        sys.exit(1)
+def print_solutions(solutions):
+    """
+    Print the N-Queens solutions to the console.
 
-    n = sys.argv[1]
-
-    if not n.isdigit():
-        print("N must be a number")
-        sys.exit(1)
-
-    n = int(n)
-
-    if n < 4:
-        print("N must be at least 4")
-        sys.exit(1)
-
-    solutions = solve_nqueens(n)
+    Args:
+        solutions (list): A list of solutions, where \
+                each solution is a list of \
+                (row, column) positions for queens.
+    """
     for solution in solutions:
         print(solution)
 
 
-if __name__ == "__main":
-    main()
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: nqueens N")
+        sys.exit(1)
+
+    try:
+        N = int(sys.argv[1])
+    except ValueError:
+        print("N must be a number")
+        sys.exit(1)
+
+    if N < 4:
+        print("N must be at least 4")
+        sys.exit(1)
+
+    solutions = solve_nqueens(N)
+    print_solutions(solutions)
