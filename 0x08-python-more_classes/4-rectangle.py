@@ -3,41 +3,19 @@
 
 
 class Rectangle:
-    """
-    This class defines a rectangle.
-
-    Attributes:
-        width (int): The width of the rectangle.
-        height (int): The height of the rectangle.
-    """
-
     def __init__(self, width=0, height=0):
         """
-        Initializes a new Rectangle instance.
+        Initialize a Rectangle instance with optional width and height.
 
         Args:
-            width (int, optional): The width of the rectangle (default is 0).
-            height (int, optional): The height of the rectangle (default is 0).
-
-        Raises:
-            TypeError: If width or height is not an integer.
-            ValueError: If width or height is less than 0.
+            width (int, optional): The width of the rectangle. Defaults to 0.
+            height (int, optional): The height of the rectangle. Defaults to 0.
         """
         self.width = width
         self.height = height
 
     @property
     def width(self):
-        """
-        int: The width of the rectangle.
-
-        Get or set the width of the rectangle. \
-                It must be a non-negative integer.
-
-        Raises:
-            TypeError: If trying to set a non-integer value.
-            ValueError: If trying to set a negative value.
-        """
         return self.__width
 
     @width.setter
@@ -50,16 +28,6 @@ class Rectangle:
 
     @property
     def height(self):
-        """
-        int: The height of the rectangle.
-
-        Get or set the height of the rectangle. It must be a \
-                non-negative integer.
-
-        Raises:
-            TypeError: If trying to set a non-integer value.
-            ValueError: If trying to set a negative value.
-        """
         return self.__height
 
     @height.setter
@@ -77,7 +45,7 @@ class Rectangle:
         Returns:
             int: The area of the rectangle.
         """
-        return self.__width * self.__height
+        return self.width * self.height
 
     def perimeter(self):
         """
@@ -86,25 +54,24 @@ class Rectangle:
         Returns:
             int: The perimeter of the rectangle.
         """
-        return 2 * (self.__width + self.__height)
+        return 2 * (self.width + self.height)
 
     def __str__(self):
         """
-        Create a string representation of the rectangle using '#'.
+        Return a string representation of the rectangle.
+
+        Returns:
+            str: A string representation of the rectangle using '#'.
+        """
+        if self.width == 0 or self.height == 0:
+            return ""
+        return "\n".join(['#' * self.width] * self.height)
+
+    def __repr__(self):
+        """
+        Return a string representation of the rectangle that can recreate a new instance using eval().
 
         Returns:
             str: A string representation of the rectangle.
         """
-        if self.__width == 0 or self.__height == 0:
-            return ""
-        return "\n".join(["#" * self.__width for _ in range(self.__height)]
-
-    def __repr__(self):
-        """
-        Create a string representation of the rectangle for reconstruction.
-
-        Returns:
-            str: A string representation that can be used with \
-                    eval() to recreate the instance.
-        """
-        return f"Rectangle({self.__width}, {self.__height})"
+        return f"Rectangle({self.width}, {self.height})"
