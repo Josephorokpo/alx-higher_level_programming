@@ -110,9 +110,3 @@ class Rectangle:
             int: The perimeter of the rectangle.
         """
         return 2 * (self._width + self._height)
-
-    def __str__(self):
-        """
-        Returns a string representation of the Rectangle instance.
-        """
-        return f"Rectangle({self._width}, {self._height})"
