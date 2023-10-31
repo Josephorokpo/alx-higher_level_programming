@@ -1,0 +1,40 @@
+import unittest
+from lazy_matrix_mul import lazy_matrix_mul
+
+class TestLazyMatrixMul(unittest.TestCase):
+    def test_matrix_multiplication(self):
+        m_a = [[1, 2], [3, 4]]
+        m_b = [[5, 6], [7, 8]]
+        result = lazy_matrix_mul(m_a, m_b)
+        self.assertEqual(result, [[19, 22], [43, 50]])
+
+    def test_empty_matrices(self):
+        m_a = []
+        m_b = [[]]
+        with self.assertRaises(ValueError) as context:
+            lazy_matrix_mul(m_a, m_b)
+        self.assertEqual(str(context.exception), "m_a and m_b can't be multiplied")
+
+    def test_non_rectangular_matrices(self):
+        m_a = [[1, 2], [3, 4]]
+        m_b = [[5, 6], [7, 8], [9, 10]]
+        with self.assertRaises(ValueError) as context:
+            lazy_matrix_mul(m_a, m_b)
+        self.assertEqual(str(context.exception), "m_a and m_b can't be multiplied")
+
+    def test_non_numeric_elements(self):
+        m_a = [[1, 2], [3, 'four']]
+        m_b = [['five', 6], [7, 8]]
+        with self.assertRaises(TypeError) as context:
+            lazy_matrix_mul(m_a, m_b)
+        self.assertEqual(str(context.exception), "m_a should contain only integers or floats")
+
+    def test_incompatible_matrices(self):
+        m_a = [[1, 2], [3, 4]]
+        m_b = [[5, 6]]
+        with self.assertRaises(ValueError) as context:
+            lazy_matrix_mul(m_a, m_b)
+        self.assertEqual(str(context.exception), "m_a and m_b can't be multiplied")
+
+if __name__ == "__main__":
+    unittest.main()
