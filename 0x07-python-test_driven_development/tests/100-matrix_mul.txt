@@ -1,0 +1,42 @@
+import unittest
+from matrix_mul import matrix_mul
+
+class TestMatrixMul(unittest.TestCase):
+
+    def test_valid_matrices(self):
+        # Test with valid matrices
+        m_a = [[1, 2], [3, 4]]
+        m_b = [[5, 6], [7, 8]]
+        result = matrix_mul(m_a, m_b)
+        self.assertEqual(result, [[19, 22], [43, 50]])
+
+    def test_empty_matrices(self):
+        # Test with empty matrices
+        m_a = []
+        m_b = [[]]
+        with self.assertRaises(ValueError):
+            matrix_mul(m_a, m_b)
+
+    def test_non_rectangle_matrices(self):
+        # Test with non-rectangular matrices
+        m_a = [[1, 2], [3, 4]]
+        m_b = [[5, 6], [7, 8], [9, 10]]
+        with self.assertRaises(ValueError):
+            matrix_mul(m_a, m_b)
+
+    def test_non_numeric_elements(self):
+        # Test with non-numeric elements
+        m_a = [[1, 2], [3, 'four']]
+        m_b = [['five', 6], [7, 8]]
+        with self.assertRaises(TypeError):
+            matrix_mul(m_a, m_b)
+
+    def test_multiplication_impossible(self):
+        # Test when multiplication is impossible
+        m_a = [[1, 2], [3, 4]]
+        m_b = [[5, 6]]
+        with self.assertRaises(ValueError):
+            matrix_mul(m_a, m_b)
+
+if __name__ == '__main__':
+    unittest.main()
