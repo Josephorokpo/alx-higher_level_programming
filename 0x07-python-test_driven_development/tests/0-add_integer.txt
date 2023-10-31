@@ -1,0 +1,45 @@
+def test_add_integer():
+    """
+    Test cases for add_integer function.
+    """
+    # Test integer inputs
+    assert add_integer(2, 3) == 5
+    assert add_integer(-10, 5) == -5
+    assert add_integer(0, 0) == 0
+
+    # Test float inputs (should cast to integers)
+    assert add_integer(2.5, 3.7) == 5
+    assert add_integer(-10.9, 5.1) == -5
+
+    # Test one integer and one float (both should be cast to integers)
+    assert add_integer(5, 3.9) == 8
+    assert add_integer(3.2, 7) == 10
+
+    # Test non-integer or non-float inputs (should raise TypeError)
+    try:
+        add_integer("5", 3)
+    except TypeError as e:
+        assert str(e) == "a must be an integer"
+
+    try:
+        add_integer(5, "3")
+    except TypeError as e:
+        assert str(e) == "b must be an integer"
+
+    try:
+        add_integer("5", "3")
+    except TypeError as e:
+        assert str(e) == "a must be an integer"
+
+    # Test with only one argument (should cast to integer)
+    assert add_integer(5) == 103
+    assert add_integer(5.5) == 103
+
+    # Test default value for b
+    assert add_integer(5) == 103
+    assert add_integer(5, b=2.2) == 7
+
+    print("All test cases passed!")
+
+if __name__ == "__main":
+    test_add_integer()
