@@ -1,0 +1,38 @@
+def text_indentation(text):
+
+
+# Test case 1: Basic input with various punctuations
+text1 = "This is a sentence. This is another sentence? And here is a third sentence: It's the last one."
+text_indentation(text1)
+
+# Test case 2: Input with no punctuations
+text2 = "No punctuations in this text. It should be printed as one block."
+text_indentation(text2)
+
+# Test case 3: Input with extra spaces
+text3 = "   Some spaces before.  Some spaces after   ?  And spaces around the colon   :   "
+text_indentation(text3)
+
+# Test case 4: Empty input
+text4 = ""
+text_indentation(text4)
+
+# Test case 5: Input with only a single punctuation
+text5 = "This is a single question?"
+text_indentation(text5)
+
+# Test case 6: Input with a single character
+text6 = ":"
+text_indentation(text6)
+
+# Test case 7: Non-string input
+try:
+    text_indentation(12345)
+except TypeError as e:
+    print("TypeError:", e)
+
+# Test case 8: Non-string input (list)
+try:
+    text_indentation(["This is a list.", "It should raise an error?"])
+except TypeError as e:
+    print("TypeError:", e)
