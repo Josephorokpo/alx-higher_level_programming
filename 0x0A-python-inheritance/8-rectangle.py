@@ -1,5 +1,34 @@
 #!/usr/bin/python3
-"""A class Rectangle"""
+"""A class BaseGeometry"""
+
+
+class BaseGeometry:
+    """
+    This is the BaseGeometry class.
+
+    Methods:
+        area(): Placeholder for area calculation.
+        integer_validator(name, value): Validates if value is an \
+                integer and greater than 0.
+    """
+    def area(self):
+        """
+        Placeholder for area calculation.
+        """
+        raise Exception("area() is not implemented")
+
+    def integer_validator(self, name, value):
+        """
+        Validates if value is an integer and greater than 0.
+
+        Args:
+            name (str): The name of the value being validated.
+            value (int): The value to validate.
+        """
+        if type(value) is not int:
+            raise TypeError(f"{name} must be an integer")
+        if value <= 0:
+            raise ValueError(f"{name} must be greater than 0")
 
 
 class Rectangle(BaseGeometry):
