@@ -1,0 +1,26 @@
+def run_tests():
+    """
+    Run doctests for the BaseGeometry class and its methods.
+    """
+    import doctest
+
+    # Create a BaseGeometry object
+    bg = BaseGeometry()
+
+    # Test the area() method
+    doctest.run_docstring_examples(
+        bg.area, globals(),
+        name="Test BaseGeometry area() method",
+        verbose=True
+    )
+
+    # Test the integer_validator() method
+    doctest.run_docstring_examples(
+        bg.integer_validator, globals(),
+        name="Test BaseGeometry integer_validator() method",
+        verbose=True
+    )
+
+
+if __name__ == "__main__":
+    run_tests()
