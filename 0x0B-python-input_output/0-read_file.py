@@ -1,28 +1,26 @@
 #!/usr/bin/python3
-"""Reads a text file (UTF8) and prints it to stdout."""
+"""Reads a text file (UTF8) and prints its content to stdout."""
 
 
-def write_file(filename="", text=""):
+def read_file(filename=""):
     """
-    Writes the given text to a file in UTF-8 encoding.
+    Reads the content of the given file and prints it to stdout.
 
     Args:
-        filename (str): The name of the file to write to.
-        text (str): The text to be written to the file.
+        filename (str): The name of the file to read.
 
     Returns:
-        int: The number of characters written to the file.
+        None
     """
     try:
-        with open(filename, 'w', encoding='utf-8') as file:
-            # Write the text to the file
-            file.write(text)
-
-            # Calculate and return the number of characters written
-            num_characters_written = len(text)
-            return num_characters_written
+        with open(filename, 'r', encoding='utf-8') as file:
+            # Read the content of the file and print it to stdout
+            print(file.read())
 
     except Exception as e:
         # Handle exceptions if any (e.g., file not found)
-        print(f"An error occurred: {str(e)}")
-        return (0)
+        pass
+
+
+if __name__ == "__main__":
+    read_file("my_file_0.txt")
