@@ -4,23 +4,22 @@
 
 def read_file(filename=""):
     """
-    Reads the content of the given file and prints it to stdout.
+    Reads a text file (UTF-8) and prints its contents to stdout.
 
     Args:
-        filename (str): The name of the file to read.
+        filename (str): The name of the file to be read.
 
     Returns:
         None
+
+    Note:
+        This function does not handle file permission or file
+        existence exceptions.
     """
     try:
         with open(filename, 'r', encoding='utf-8') as file:
-            # Read the content of the file and print it to stdout
-            print(file.read())
+            for line in file:
+                print(line, end='')
 
     except Exception as e:
-        # Handle exceptions if any (e.g., file not found)
-        pass
-
-
-if __name__ == "__main__":
-    read_file("my_file_0.txt")
+        print(f"An error occurred: {str(e)}")
