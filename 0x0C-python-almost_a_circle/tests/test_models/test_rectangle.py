@@ -1,5 +1,7 @@
 import unittest
 from models.rectangle import Rectangle
+from io import StringIO
+import sys
 
 
 class TestRectangle(unittest.TestCase):
@@ -89,6 +91,24 @@ class TestRectangle(unittest.TestCase):
         rectangle.width = 5
         rectangle.height = 8
         self.assertEqual(rectangle.area(), 40)
+
+    def test_display_method(self):
+        """
+        Test if the display method prints the rectangle correctly.
+        """
+        rectangle = Rectangle(3, 4)
+
+        # Redirect stdout to capture printed output
+        captured_output = StringIO()
+        sys.stdout = captured_output
+
+        rectangle.display()
+
+        # Reset redirect.
+        sys.stdout = sys.__stdout__
+
+        expected_output = "###\n###\n###\n###\n"
+        self.assertEqual(captured_output.getvalue(), expected_output)
 
 
 if __name__ == '__main__':
