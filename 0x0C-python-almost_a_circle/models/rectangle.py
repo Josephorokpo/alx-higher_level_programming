@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """
-Updated the class Rectangle that overrides the __str__ method so that it \
-        returns [Rectangle] (<id>) <x>/<y> - <width>/<height>
+Updated class Rectangle by improving the public method display
 """
 
 
@@ -90,9 +89,14 @@ class Rectangle(Base):
         return self.width * self.height
 
     def display(self):
-        """Display the rectangle with '#' characters."""
+        """
+        Display the rectangle with '#' characters, taking into
+        account x and y.
+        """
+        for _ in range(self.y):
+            print()
         for _ in range(self.height):
-            print('#' * self.width)
+            print(" " * self.x + '#' * self.width)
 
     def __str__(self):
         """Return a string representation of the rectangle."""
