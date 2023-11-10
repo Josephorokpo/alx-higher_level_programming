@@ -94,9 +94,9 @@ class TestRectangle(unittest.TestCase):
 
     def test_display_method(self):
         """
-        Test if the display method prints the rectangle correctly.
+        Test if the display method prints the rectangle correctly with x and y.
         """
-        rectangle = Rectangle(3, 4)
+        rectangle = Rectangle(3, 4, 1, 2)
 
         # Redirect stdout to capture printed output
         captured_output = StringIO()
@@ -107,7 +107,7 @@ class TestRectangle(unittest.TestCase):
         # Reset redirect.
         sys.stdout = sys.__stdout__
 
-        expected_output = "###\n###\n###\n###\n"
+        expected_output = "\n\n ###\n ###\n ###\n ###\n"
         self.assertEqual(captured_output.getvalue(), expected_output)
 
     def test_str_method(self):
