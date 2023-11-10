@@ -1,5 +1,8 @@
 #!/usr/bin/python3
-"""Class Rectangle with public method display"""
+"""
+Updated the class Rectangle that overrides the __str__ method so that it \
+        returns [Rectangle] (<id>) <x>/<y> - <width>/<height>
+"""
 
 
 from models.base import Base
@@ -90,3 +93,7 @@ class Rectangle(Base):
         """Display the rectangle with '#' characters."""
         for _ in range(self.height):
             print('#' * self.width)
+
+    def __str__(self):
+        """Return a string representation of the rectangle."""
+        return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
