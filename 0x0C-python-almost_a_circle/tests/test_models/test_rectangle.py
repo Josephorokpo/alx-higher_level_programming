@@ -28,11 +28,11 @@ class TestRectangle(unittest.TestCase):
         rectangle.width = 30
         self.assertEqual(rectangle.width, 30)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             rectangle.width = "invalid_width"
 
         with self.assertRaises(ValueError):
-            rectangle.width = -5
+            rectangle.width = 0
 
     def test_height_setter(self):
         """
@@ -43,7 +43,7 @@ class TestRectangle(unittest.TestCase):
         rectangle.height = 25
         self.assertEqual(rectangle.height, 25)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             rectangle.height = "invalid_height"
 
         with self.assertRaises(ValueError):
@@ -58,7 +58,7 @@ class TestRectangle(unittest.TestCase):
         rectangle.x = 15
         self.assertEqual(rectangle.x, 15)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             rectangle.x = "invalid_x"
 
         with self.assertRaises(ValueError):
@@ -73,7 +73,7 @@ class TestRectangle(unittest.TestCase):
         rectangle.y = 12
         self.assertEqual(rectangle.y, 12)
 
-        with self.assertRaises(ValueError):
+        with self.assertRaises(TypeError):
             rectangle.y = "invalid_y"
 
         with self.assertRaises(ValueError):
