@@ -110,6 +110,13 @@ class TestRectangle(unittest.TestCase):
         expected_output = "###\n###\n###\n###\n"
         self.assertEqual(captured_output.getvalue(), expected_output)
 
+    def test_str_method(self):
+        """
+        Test if the str method returns the correct string representation.
+        """
+        rectangle = Rectangle(10, 20, 5, 8, 1)
+        self.assertEqual(str(rectangle), "[Rectangle] (1) 5/8 - 10/20")
+
 
 if __name__ == '__main__':
     unittest.main()
