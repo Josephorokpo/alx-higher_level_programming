@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Class Rectangle"""
+"""Class Rectangle with validation"""
 
 
 from models.base import Base
@@ -35,9 +35,9 @@ class Rectangle(Base):
     def width(self, value):
         """Setter for width attribute."""
         if not isinstance(value, int):
-            raise ValueError("Width must be an integer")
+            raise TypeError("Width must be an integer")
         if value <= 0:
-            raise ValueError("Width must be greater than 0")
+            raise ValueError("Width must be > 0")
         self.__width = value
 
     @property
@@ -49,9 +49,9 @@ class Rectangle(Base):
     def height(self, value):
         """Setter for height attribute."""
         if not isinstance(value, int):
-            raise ValueError("Height must be an integer")
+            raise TypeError("Height must be an integer")
         if value <= 0:
-            raise ValueError("Height must be greater than 0")
+            raise ValueError("Height must be > 0")
         self.__height = value
 
     @property
@@ -63,9 +63,9 @@ class Rectangle(Base):
     def x(self, value):
         """Setter for x attribute."""
         if not isinstance(value, int):
-            raise ValueError("X must be an integer")
+            raise TypeError("X must be an integer")
         if value < 0:
-            raise ValueError("X must be greater than or equal to 0")
+            raise ValueError("X must be >= 0")
         self.__x = value
 
     @property
@@ -77,7 +77,7 @@ class Rectangle(Base):
     def y(self, value):
         """Setter for y attribute."""
         if not isinstance(value, int):
-            raise ValueError("Y must be an integer")
+            raise TypeError("Y must be an integer")
         if value < 0:
-            raise ValueError("Y must be greater than or equal to 0")
+            raise ValueError("Y must be >= 0")
         self.__y = value
