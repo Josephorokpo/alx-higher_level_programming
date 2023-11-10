@@ -79,6 +79,17 @@ class TestRectangle(unittest.TestCase):
         with self.assertRaises(ValueError):
             rectangle.y = -7
 
+    def test_area_method(self):
+        """
+        Test if the area method returns the correct area.
+        """
+        rectangle = Rectangle(10, 20)
+        self.assertEqual(rectangle.area(), 200)
+
+        rectangle.width = 5
+        rectangle.height = 8
+        self.assertEqual(rectangle.area(), 40)
+
 
 if __name__ == '__main__':
     unittest.main()
