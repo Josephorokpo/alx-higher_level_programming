@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Class Rectangle with public method area"""
+"""Class Rectangle with public method display"""
 
 
 from models.base import Base
@@ -85,3 +85,8 @@ class Rectangle(Base):
     def area(self):
         """Calculate and return the area of the rectangle."""
         return self.width * self.height
+
+    def display(self):
+        """Display the rectangle with '#' characters."""
+        for _ in range(self.height):
+            print('#' * self.width)
