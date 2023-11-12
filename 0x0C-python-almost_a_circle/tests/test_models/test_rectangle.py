@@ -9,8 +9,8 @@ class TestRectangleUpdateMethod(unittest.TestCase):
 
     def test_update_method_no_args(self):
         """
-        Test if update method does not modify attributes
-        when no arguments are provided.
+        Test if update method does not modify attributes when
+        no arguments are provided.
         """
         rectangle = Rectangle(10, 20, 5, 8, 1)
         rectangle.update()
@@ -23,8 +23,8 @@ class TestRectangleUpdateMethod(unittest.TestCase):
 
     def test_update_method_with_args(self):
         """
-        Test if update method correctly updates attributes
-        with provided arguments.
+        Test if update method correctly updates attributes with
+        provided arguments.
         """
         rectangle = Rectangle(10, 20, 5, 8, 1)
         rectangle.update(2, 15, 25, 3, 4)
@@ -37,8 +37,8 @@ class TestRectangleUpdateMethod(unittest.TestCase):
 
     def test_update_method_partial_args(self):
         """
-        Test if update method correctly updates attributes
-        with partial arguments.
+        Test if update method correctly updates attributes with
+        partial arguments.
         """
         rectangle = Rectangle(10, 20, 5, 8, 1)
         rectangle.update(2, 15)
@@ -51,8 +51,8 @@ class TestRectangleUpdateMethod(unittest.TestCase):
 
     def test_update_method_extra_args(self):
         """
-        Test if update method ignores extra arguments
-        beyond the fifth argument.
+        Test if update method ignores extra arguments beyond
+        the fifth argument.
         """
         rectangle = Rectangle(10, 20, 5, 8, 1)
         rectangle.update(2, 15, 25, 3, 4, 99, "extra")
@@ -65,8 +65,8 @@ class TestRectangleUpdateMethod(unittest.TestCase):
 
     def test_update_method_keyword_args(self):
         """
-        Test if update method correctly updates
-        attributes with keyword arguments.
+        Test if update method correctly updates attributes
+        with keyword arguments.
         """
         rectangle = Rectangle(10, 20, 5, 8, 1)
         rectangle.update(id=2, width=15, height=25, x=3, y=4)
