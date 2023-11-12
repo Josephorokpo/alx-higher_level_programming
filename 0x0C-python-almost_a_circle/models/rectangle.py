@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Updated class Rectangle by improving the public method display 
+Rectangle class with the added update method.
 """
 
 
@@ -90,8 +90,8 @@ class Rectangle(Base):
 
     def display(self):
         """
-        Display the rectangle with '#' characters, taking
-        into account x and y.
+        Display the rectangle with '#' characters, taking into
+        account x and y.
         """
         for _ in range(self.y):
             print()
@@ -101,3 +101,12 @@ class Rectangle(Base):
     def __str__(self):
         """Return a string representation of the rectangle."""
         return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
+
+    def update(self, *args):
+        """
+        Update attributes with the provided arguments.
+
+        :param args: Arguments in the order (id, width, height, x, y).
+        """
+        if args:
+            self.id, self.width, self.height, self.x, self.y = args[:5]
