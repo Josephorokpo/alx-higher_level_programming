@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Rectangle class with the added update method.
+Updated the class Rectangle that overrides the __str__ method so
+that it returns [Rectangle] (<id>) <x>/<y> - <width>/<height>
 """
 
 
@@ -89,24 +90,10 @@ class Rectangle(Base):
         return self.width * self.height
 
     def display(self):
-        """
-        Display the rectangle with '#' characters, taking into
-        account x and y.
-        """
-        for _ in range(self.y):
-            print()
+        """Display the rectangle with '#' characters."""
         for _ in range(self.height):
-            print(" " * self.x + '#' * self.width)
+            print('#' * self.width)
 
     def __str__(self):
         """Return a string representation of the rectangle."""
         return "[Rectangle] ({}) {}/{} - {}/{}".format(self.id, self.x, self.y, self.width, self.height)
-
-    def update(self, *args):
-        """
-        Update attributes with the provided arguments.
-
-        :param args: Arguments in the order (id, width, height, x, y).
-        """
-        if args:
-            self.id, self.width, self.height, self.x, self.y = args[:5]
