@@ -23,8 +23,8 @@ class TestRectangleUpdateMethod(unittest.TestCase):
 
     def test_update_method_with_args(self):
         """
-        Test if update method correctly updates attributes with
-        provided arguments.
+        Test if update method correctly updates attributes
+        with provided arguments.
         """
         rectangle = Rectangle(10, 20, 5, 8, 1)
         rectangle.update(2, 15, 25, 3, 4)
@@ -41,7 +41,7 @@ class TestRectangleUpdateMethod(unittest.TestCase):
         partial arguments.
         """
         rectangle = Rectangle(10, 20, 5, 8, 1)
-        rectangle.update(2, 15, 25, 3, 4)
+        rectangle.update(2, 15)
 
         self.assertEqual(rectangle.id, 2)
         self.assertEqual(rectangle.width, 15)
@@ -65,8 +65,8 @@ class TestRectangleUpdateMethod(unittest.TestCase):
 
     def test_update_method_keyword_args(self):
         """
-        Test if update method correctly updates attributes
-        with keyword arguments.
+        Test if update method correctly updates attributes with
+        keyword arguments.
         """
         rectangle = Rectangle(10, 20, 5, 8, 1)
         rectangle.update(id=2, width=15, height=25, x=3, y=4)
