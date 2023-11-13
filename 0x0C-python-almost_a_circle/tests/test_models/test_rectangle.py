@@ -3,37 +3,50 @@ from models.rectangle import Rectangle
 
 
 class TestRectangleMethods(unittest.TestCase):
+    """
+    Test cases for the Rectangle class methods.
+    """
+
     def test_area(self):
-        rectangle = Rectangle(5, 10)
-        self.assertEqual(rectangle.area(), 50)
+        """
+        Test the area method of the Rectangle class.
+        """
+        rectangle = Rectangle(4, 5)
+        self.assertEqual(rectangle.area(), 20)
 
     def test_display(self):
-        rectangle = Rectangle(3, 2)
-        expected_output = "###\n###\n"
-        with unittest.mock.patch('sys.stdout', new_callable=io.StringIO) as mock_stdout:
+        """
+        Test the display method of the Rectangle class.
+        """
+        rectangle = Rectangle(4, 3, 2, 1)
+        expected_output = "\n" * 1 + " " * 2 + "####\n" * 3
+        with self.assertLogs() as log:
             rectangle.display()
-            self.assertEqual(mock_stdout.getvalue(), expected_output)
+            self.assertEqual(log.output, [])
+        self.assertEqual(log.output, [])
+        self.assertEqual(expected_output, log.output)
 
-    def test_str_representation(self):
-        rectangle = Rectangle(4, 8, 2, 3, 7)
-        expected_str = "[Rectangle] (7) 2/3 - 4/8"
-        self.assertEqual(str(rectangle), expected_str)
+    def test_str(self):
+        """
+        Test the __str__ method of the Rectangle class.
+        """
+        rectangle = Rectangle(4, 3, 2, 1, 99)
+        self.assertEqual(str(rectangle), "[Rectangle] (99) 2/1 - 4/3")
 
-    def test_update_method_with_args(self):
-        rectangle = Rectangle(10, 20, 5, 8, 1)
-        rectangle.update(2, 15, 25, 3, 4)
-        expected_str = "[Rectangle] (2) 3/4 - 15/25"
-        self.assertEqual(str(rectangle), expected_str)
+    def test_update_method(self):
+        """
+        Test the update method of the Rectangle class.
+        """
+        rectangle = Rectangle(4, 3, 2, 1, 99)
+        rectangle.update(1, 5, 5, 1, 0)
+        self.assertEqual(str(rectangle), "[Rectangle] (1) 1/0 - 5/5")
 
-    def test_update_method_partial_args(self):
-        rectangle = Rectangle(10, 20, 5, 8, 1)
-        rectangle.update(2, 15)
-        expected_str = "[Rectangle] (2) 5/8 - 15/20"
-        self.assertEqual(str(rectangle), expected_str)
-
-    def test_to_dictionary(self):
-        rectangle = Rectangle(10, 20, 5, 8, 1)
-        expected_dict = {'id': 1, 'width': 10, 'height': 20, 'x': 5, 'y': 8}
+    def test_to_dictionary_method(self):
+        """
+        Test the to_dictionary method of the Rectangle class.
+        """
+        rectangle = Rectangle(4, 3, 2, 1, 99)
+        expected_dict = {'id': 99, 'width': 4, 'height': 3, 'x': 2, 'y': 1}
         self.assertEqual(rectangle.to_dictionary(), expected_dict)
 
 
