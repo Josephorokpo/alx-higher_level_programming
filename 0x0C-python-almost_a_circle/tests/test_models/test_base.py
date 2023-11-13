@@ -1,6 +1,8 @@
 import unittest
 import os
-from models.base import Base, Rectangle, Square
+from models.rectangle import Rectangle
+from models.square import Square
+from models.base import Base
 
 
 class TestBaseSaveToFile(unittest.TestCase):
@@ -23,8 +25,8 @@ class TestBaseSaveToFile(unittest.TestCase):
 
     def test_save_to_file_rectangle(self):
         """
-        Test if save_to_file saves the JSON representation of a list of
-        Rectangle objects to a file.
+        Test if save_to_file saves the JSON representation
+        of a list of Rectangle objects to a file.
         """
         Rectangle.save_to_file([self.rectangle1, self.rectangle2])
         with open('Rectangle.json', 'r') as file:
@@ -34,8 +36,8 @@ class TestBaseSaveToFile(unittest.TestCase):
 
     def test_save_to_file_square(self):
         """
-        Test if save_to_file saves the JSON representation of a
-        list of Square objects to a file.
+        Test if save_to_file saves the JSON representation of a list of
+        Square objects to a file.
         """
         Square.save_to_file([self.square1, self.square2])
         with open('Square.json', 'r') as file:
