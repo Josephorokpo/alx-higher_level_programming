@@ -2,41 +2,43 @@ import unittest
 from models.base import Base
 
 
-class TestBase(unittest.TestCase):
+class TestBaseToJsonString(unittest.TestCase):
     """
-    Test cases for the Base class.
+    Test cases for the to_json_string method of the Base class.
     """
 
-    def test_id_incrementation(self):
-        """
-        Test if the id attribute is incremented correctly.
-        """
-        obj1 = Base()
-        obj2 = Base()
+    def test_to_json_string_empty_list(self):
+        """Test if to_json_string returns '[]' for an empty list."""
+        result = Base.to_json_string([])
+        self.assertEqual(result, "[]")
 
-        self.assertEqual(obj1.id, 1)
-        self.assertEqual(obj2.id, 2)
+    def test_to_json_string_none(self):
+        """Test if to_json_string returns '[]' for None."""
+        result = Base.to_json_string(None)
+        self.assertEqual(result, "[]")
 
-    def test_id_assignment(self):
+    def test_to_json_string_single_dict(self):
         """
-        Test if the id attribute is assigned correctly when provided.
+        Test if to_json_string converts a single dictionary
+        to a JSON string.
         """
-        obj = Base(100)
-        self.assertEqual(obj.id, 100)
+        test_list = [{'id': 1, 'name': 'Alice'}]
+        result = Base.to_json_string(test_list)
+        expected = '[{"id": 1, "name": "Alice"}]'
+        self.assertEqual(result, expected)
 
-    def test_id_type(self):
+    def test_to_json_string_multiple_dicts(self):
         """
-        Test if the id attribute is an integer.
+        Test if to_json_string converts multiple dictionaries
+        to a JSON string.
         """
-        obj = Base()
-        self.assertIsInstance(obj.id, int)
-
-    def test_documentation(self):
-        """
-        Test if the documentation is present for the module, class, and method.
-        """
-        self.assertIsNotNone(Base.__doc__)
-        self.assertIsNotNone(Base.__init__.__doc__)
+        test_list = [
+            {'id': 1, 'name': 'Alice'},
+            {'id': 2, 'name': 'Bob'}
+        ]
+        result = Base.to_json_string(test_list)
+        expected = '[{"id": 1, "name": "Alice"}, {"id": 2, "name": "Bob"}]'
+        self.assertEqual(result, expected)
 
 
 if __name__ == '__main__':
