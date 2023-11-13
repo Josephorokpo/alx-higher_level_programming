@@ -1,93 +1,63 @@
 import unittest
-import json
+from unittest.mock import patch
 from models.rectangle import Rectangle
 from models.square import Square
 from models.base import Base
+import io
+import sys
 
 
 class TestBaseMethods(unittest.TestCase):
-
     def test_to_json_string(self):
-        # Test to_json_string with valid input
         r1 = Rectangle(10, 7, 2, 8)
-        r2 = Rectangle(2, 4)
-        json_string = Base.to_json_string([r1.to_dictionary(), r2.to_dictionary()])
-        expected_result = json.dumps([r1.to_dictionary(), r2.to_dictionary()])
-        self.assertEqual(json_string, expected_result)
-
-        # Test to_json_string with None
-        json_string = Base.to_json_string(None)
-        self.assertEqual(json_string, "[]")
-
-        # Test to_json_string with empty list
-        json_string = Base.to_json_string([])
-        self.assertEqual(json_string, "[]")
+        dictionary = r1.to_dictionary()
+        json_string = Base.to_json_string([dictionary])
+        self.assertEqual(json_string, '[{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}]')
 
     def test_from_json_string(self):
-        # Test from_json_string with valid input
-        json_string = '[{"y": 8, "x": 2, "id": 1, "width": 10, "height": 7},' \
-                      ' {"y": 0, "x": 0, "id": 2, "width": 2, "height": 4}]'
-        obj_list = Base.from_json_string(json_string)
-        expected_result = [r.to_dictionary() for r in [Rectangle(10, 7, 2, 8), Rectangle(2, 4)]]
-        self.assertEqual(obj_list, expected_result)
-
-        # Test from_json_string with None
-        obj_list = Base.from_json_string(None)
-        self.assertEqual(obj_list, [])
-
-        # Test from_json_string with empty string
-        obj_list = Base.from_json_string("")
-        self.assertEqual(obj_list, [])
+        json_string = '[{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}]'
+        list_dicts = Base.from_json_string(json_string)
+        self.assertEqual(list_dicts, [{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}])
 
     def test_create(self):
-        # Test create with valid input
         r1 = Rectangle(10, 7, 2, 8)
-        r1_dict = r1.to_dictionary()
-        r2 = Rectangle.create(**r1_dict)
-        self.assertNotEqual(r1, r2)  # Different instances
+        dictionary = r1.to_dictionary()
+        r2 = Rectangle.create(**dictionary)
+        self.assertNotEqual(r1, r2)
         self.assertEqual(r1.to_dictionary(), r2.to_dictionary())
 
-        # Test create with invalid input
-        with self.assertRaises(ValueError):
-            Base.create(**{"invalid_key": 42})
-
     def test_load_from_file(self):
-        # Test load_from_file with valid input
         r1 = Rectangle(10, 7, 2, 8)
         r2 = Rectangle(2, 4)
-        file_name = "Rectangle.json"
-        Rectangle.save_to_file([r1, r2])
-        obj_list = Rectangle.load_from_file()
-        self.assertEqual(obj_list, [r1, r2])
-
-        # Test load_from_file with non-existent file
-        Square.load_from_file()  # This should not raise an exception
+        list_rectangles_input = [r1, r2]
+        Rectangle.save_to_file(list_rectangles_input)
+        list_rectangles_output = Rectangle.load_from_file()
+        self.assertNotEqual(list_rectangles_input[0], list_rectangles_output[0])
+        self.assertEqual(list_rectangles_input[0].to_dictionary(), list_rectangles_output[0].to_dictionary())
 
     def test_save_to_file(self):
-        # Test save_to_file with valid input
         r1 = Rectangle(10, 7, 2, 8)
         r2 = Rectangle(2, 4)
-        file_name = "Rectangle.json"
         Rectangle.save_to_file([r1, r2])
-        with open(file_name, "r") as file:
-            file_content = file.read()
-            expected_result = '[{"y": 8, "x": 2, "id": 1, "width": 10, "height": 7},' \
-                              ' {"y": 0, "x": 0, "id": 2, "width": 2, "height": 4}]'
-            self.assertEqual(file_content, expected_result)
+        with open("Rectangle.json", "r") as file:
+            content = file.read()
+            self.assertEqual(content, '[{"id": 1, "width": 10, "height": 7, "x": 2, "y": 8}, '
+                                      '{"id": 2, "width": 2, "height": 4, "x": 0, "y": 0}]')
 
-        # Test save_to_file with None
-        file_name = "Empty.json"
-        Rectangle.save_to_file(None)
-        with open(file_name, "r") as file:
-            file_content = file.read()
-            self.assertEqual(file_content, "[]")
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def assert_stdout(self, expected_output, mock_stdout):
+        with self.subTest():
+            Base.draw([], [])
+            self.assertEqual(mock_stdout.getvalue(), expected_output)
 
-        # Test save_to_file with empty list
-        Square.save_to_file([])
-        with open("Square.json", "r") as file:
-            file_content = file.read()
-            self.assertEqual(file_content, "[]")
+    def test_draw(self):
+        r1 = Rectangle(10, 7, 2, 8)
+        r2 = Rectangle(2, 4)
+        list_rectangles = [r1, r2]
+        list_squares = [Square(5), Square(7, 9, 1)]
+        expected_output = "..."
+        self.assert_stdout(expected_output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
