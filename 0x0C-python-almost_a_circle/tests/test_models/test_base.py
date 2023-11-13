@@ -1,38 +1,45 @@
 import unittest
-import json
-from models.base import Base, Rectangle
+from models.base import Base
 
 
-class TestBaseSaveToFile(unittest.TestCase):
+class TestBaseToJsonString(unittest.TestCase):
+    """
+    Test cases for the to_json_string method of the Base class.
+    """
 
-    def test_save_to_file(self):
-        """Test save_to_file method."""
-        # Create instances for testing
-        r1 = Rectangle(10, 7, 2, 8)
-        r2 = Rectangle(2, 4)
-        list_rectangles = [r1, r2]
+    def test_to_json_string_empty_list(self):
+        """Test if to_json_string returns '[]' for an empty list."""
+        result = Base.to_json_string([])
+        self.assertEqual(result, "[]")
 
-        # Save instances to file
-        Rectangle.save_to_file(list_rectangles)
+    def test_to_json_string_none(self):
+        """Test if to_json_string returns '[]' for None."""
+        result = Base.to_json_string(None)
+        self.assertEqual(result, "[]")
 
-        # Read from the file
-        filename = "Rectangle.json"
-        with open(filename, mode="r", encoding="utf-8") as file:
-            content = file.read()
+    def test_to_json_string_single_dict(self):
+        """
+        Test if to_json_string converts a single dictionary
+        to a JSON string.
+        """
+        test_list = [{'id': 1, 'name': 'Alice'}]
+        result = Base.to_json_string(test_list)
+        expected = '[{"id": 1, "name": "Alice"}]'
+        self.assertEqual(result, expected)
 
-        # Convert content to list of dictionaries
-        saved_data = json.loads(content)
+    def test_to_json_string_multiple_dicts(self):
+        """
+        Test if to_json_string converts multiple dictionaries
+        to a JSON string.
+        """
+        test_list = [
+            {'id': 1, 'name': 'Alice'},
+            {'id': 2, 'name': 'Bob'}
+        ]
+        result = Base.to_json_string(test_list)
+        expected = '[{"id": 1, "name": "Alice"}, {"id": 2, "name": "Bob"}]'
+        self.assertEqual(result, expected)
 
-        # Assert that the saved data is a list with correct length
-        self.assertIsInstance(saved_data, list)
-        self.assertEqual(len(saved_data), len(list_rectangles))
 
-        # Assert that each dictionary in the list represents
-        # the object correctly
-        for saved_dict, obj in zip(saved_data, list_rectangles):
-            expected_dict = obj.to_dictionary()
-            self.assertDictEqual(saved_dict, expected_dict)
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
