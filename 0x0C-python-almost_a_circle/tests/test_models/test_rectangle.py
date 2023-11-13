@@ -2,52 +2,80 @@ import unittest
 from models.rectangle import Rectangle
 
 
-class TestRectangleMethods(unittest.TestCase):
+class TestRectangleUpdateMethod(unittest.TestCase):
     """
-    Test cases for the Rectangle class methods.
+    Test cases for the update method of the Rectangle class.
     """
 
-    def test_area(self):
+    def test_update_method_no_args(self):
         """
-        Test the area method of the Rectangle class.
+        Test if update method does not modify attributes
+        when no arguments are provided.
         """
-        rectangle = Rectangle(4, 5)
-        self.assertEqual(rectangle.area(), 20)
+        rectangle = Rectangle(10, 20, 5, 8, 1)
+        rectangle.update()
 
-    def test_display(self):
-        """
-        Test the display method of the Rectangle class.
-        """
-        rectangle = Rectangle(4, 3, 2, 1)
-        expected_output = "\n" * 1 + " " * 2 + "####\n" * 3
-        with self.assertLogs() as log:
-            rectangle.display()
-            self.assertEqual(log.output, [])
-        self.assertEqual(log.output, [])
-        self.assertEqual(expected_output, log.output)
+        self.assertEqual(rectangle.id, 1)
+        self.assertEqual(rectangle.width, 10)
+        self.assertEqual(rectangle.height, 20)
+        self.assertEqual(rectangle.x, 5)
+        self.assertEqual(rectangle.y, 8)
 
-    def test_str(self):
+    def test_update_method_with_args(self):
         """
-        Test the __str__ method of the Rectangle class.
+        Test if update method correctly updates attributes
+        with provided arguments.
         """
-        rectangle = Rectangle(4, 3, 2, 1, 99)
-        self.assertEqual(str(rectangle), "[Rectangle] (99) 2/1 - 4/3")
+        rectangle = Rectangle(10, 20, 5, 8, 1)
+        rectangle.update(2, 15, 25, 3, 4)
 
-    def test_update_method(self):
-        """
-        Test the update method of the Rectangle class.
-        """
-        rectangle = Rectangle(4, 3, 2, 1, 99)
-        rectangle.update(1, 5, 5, 1, 0)
-        self.assertEqual(str(rectangle), "[Rectangle] (1) 1/0 - 5/5")
+        self.assertEqual(rectangle.id, 2)
+        self.assertEqual(rectangle.width, 15)
+        self.assertEqual(rectangle.height, 25)
+        self.assertEqual(rectangle.x, 3)
+        self.assertEqual(rectangle.y, 4)
 
-    def test_to_dictionary_method(self):
+    def test_update_method_partial_args(self):
         """
-        Test the to_dictionary method of the Rectangle class.
+        Test if update method correctly updates attributes
+        with partial arguments.
         """
-        rectangle = Rectangle(4, 3, 2, 1, 99)
-        expected_dict = {'id': 99, 'width': 4, 'height': 3, 'x': 2, 'y': 1}
-        self.assertEqual(rectangle.to_dictionary(), expected_dict)
+        rectangle = Rectangle(10, 20, 5, 8, 1)
+        rectangle.update(2, 15)
+
+        self.assertEqual(rectangle.id, 2)
+        self.assertEqual(rectangle.width, 15)
+        self.assertEqual(rectangle.height, 20)
+        self.assertEqual(rectangle.x, 5)
+        self.assertEqual(rectangle.y, 8)
+
+    def test_update_method_extra_args(self):
+        """
+        Test if update method ignores extra arguments
+        beyond the fifth argument.
+        """
+        rectangle = Rectangle(10, 20, 5, 8, 1)
+        rectangle.update(2, 15, 25, 3, 4, 99, "extra")
+
+        self.assertEqual(rectangle.id, 2)
+        self.assertEqual(rectangle.width, 15)
+        self.assertEqual(rectangle.height, 25)
+        self.assertEqual(rectangle.x, 3)
+        self.assertEqual(rectangle.y, 4)
+
+    def test_update_method_keyword_args(self):
+        """
+        Test if update method correctly updates attributes
+        with keyword arguments.
+        """
+        rectangle = Rectangle(10, 20, 5, 8, 1)
+        rectangle.update(id=2, width=15, height=25, x=3, y=4)
+
+        self.assertEqual(rectangle.id, 2)
+        self.assertEqual(rectangle.width, 15)
+        self.assertEqual(rectangle.height, 25)
+        self.assertEqual(rectangle.x, 3)
+        self.assertEqual(rectangle.y, 4)
 
 
 if __name__ == '__main__':
