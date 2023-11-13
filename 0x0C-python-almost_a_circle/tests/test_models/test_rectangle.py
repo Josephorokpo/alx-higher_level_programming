@@ -41,7 +41,7 @@ class TestRectangleUpdateMethod(unittest.TestCase):
         partial arguments.
         """
         rectangle = Rectangle(10, 20, 5, 8, 1)
-        rectangle.update(2, 15)
+        rectangle.update(2, 15, 25, 3, 4)
 
         self.assertEqual(rectangle.id, 2)
         self.assertEqual(rectangle.width, 15)
