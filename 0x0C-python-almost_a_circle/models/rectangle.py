@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
-Rectangle class with the added update method.
+ Updated rectangle class with public method to_dictionary.
 """
+
 
 from models.base import Base
 
@@ -89,8 +90,8 @@ class Rectangle(Base):
 
     def display(self):
         """
-        Display the rectangle with '#' characters,
-        taking into account x and y.
+        Display the rectangle with '#' characters, taking into
+        account x and y.
         """
         for _ in range(self.y):
             print()
@@ -121,3 +122,9 @@ class Rectangle(Base):
         # Handle keyword arguments
         for key, value in kwargs.items():
             setattr(self, key, value)
+
+    def to_dictionary(self):
+        """
+        Return the dictionary representation of the Rectangle.
+        """
+        return {'id': self.id, 'width': self.width, 'height': self.height, 'x': self.x, 'y': self.y}
