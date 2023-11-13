@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Updated class Square with the public getter and setter size.
+Updated class Square with the public method update.
 """
 
 
@@ -33,6 +33,20 @@ class Square(Rectangle):
         """Setter for size attribute."""
         self.width = value
         self.height = value
+
+    def update(self, *args, **kwargs):
+        """
+        Update attributes with the provided arguments.
+
+        :param args: Positional arguments in the order (id, size, x, y).
+        :param kwargs: Keyword arguments for attributes (id, size, x, y).
+        """
+        if args:
+            self.id, self.size, self.x, self.y = args[:4]
+
+        # Handle keyword arguments
+        for key, value in kwargs.items():
+            setattr(self, key, value)
 
 
 if __name__ == "__main__":
