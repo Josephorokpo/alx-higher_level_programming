@@ -41,25 +41,18 @@ class Square(Rectangle):
         :param kwargs: Keyword arguments for attributes (id, size, x, y).
         """
         if args:
-            args_count = len(args)
-            if args_count >= 1:
-                self.id = args[0]
-            if args_count >= 2:
-                self.size = args[1]
-            if args_count >= 3:
-                self.x = args[2]
-            if args_count >= 4:
-                self.y = args[3]
+            # Update id, size, x, y if provided
+            self.id = args[0] if len(args) > 0 else self.id
+            self.size = args[1] if len(args) > 1 else self.size
+            self.x = args[2] if len(args) > 2 else self.x
+            self.y = args[3] if len(args) > 3 else self.y
 
         # Handle keyword arguments
         for key, value in kwargs.items():
             setattr(self, key, value)
 
-    def __str__(self):
-        """Return a string representation of the square."""
-        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y, self.width)
-
-
-if __name__ == "__main__":
-    square = Square(5, 10, 15, 1)
-    print(square)
+    def to_dictionary(self):
+        """
+        Return the dictionary representation of the Square.
+        """
+        return {'id': self.id, 'size': self.size, 'x': self.x, 'y': self.y}
