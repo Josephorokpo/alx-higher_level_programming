@@ -1,26 +1,35 @@
 #!/usr/bin/python3
-"""Class Base"""
+"""
+Updated class Base with added static method to_json_string
+"""
+
+
+import json
 
 
 class Base:
     """
-    Base class for managing id attribute in all future classes.
+    Base class for other classes.
     """
 
-    # private class attribute
     __nb_objects = 0
 
     def __init__(self, id=None):
-        """
-        Constructor for the Base class.
-
-        If id is provided, assign it to the public instance attribute id.
-        Otherwise, increment __nb_objects and assign the new value to id.
-
-        :param id: An integer representing the id (optional).
-        """
+        """Constructor for Base class."""
         if id is not None:
             self.id = id
         else:
             Base.__nb_objects += 1
             self.id = Base.__nb_objects
+
+    @staticmethod
+    def to_json_string(list_dictionaries):
+        """
+        Convert a list of dictionaries to a JSON string representation.
+
+        :param list_dictionaries: List of dictionaries to convert.
+        :return: JSON string representation of list_dictionaries.
+        """
+        if list_dictionaries is None or len(list_dictionaries) == 0:
+            return "[]"
+        return json.dumps(list_dictionaries)
