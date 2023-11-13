@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Square class that inherits from Rectangle.
+Updated class Square with the public getter and setter size.
 """
 
 
@@ -34,6 +34,6 @@ class Square(Rectangle):
         self.width = value
         self.height = value
 
-    def __str__(self):
-        """Return a string representation of the square."""
-        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y, self.width)
+
+if __name__ == "__main__":
+    pass
