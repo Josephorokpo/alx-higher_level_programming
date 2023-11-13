@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-Updated class Square with the public method update.
+Square class that inherits from Rectangle.
 """
-
 
 from models.rectangle import Rectangle
 
@@ -42,12 +41,25 @@ class Square(Rectangle):
         :param kwargs: Keyword arguments for attributes (id, size, x, y).
         """
         if args:
-            self.id, self.size, self.x, self.y = args[:4]
+            args_count = len(args)
+            if args_count >= 1:
+                self.id = args[0]
+            if args_count >= 2:
+                self.size = args[1]
+            if args_count >= 3:
+                self.x = args[2]
+            if args_count >= 4:
+                self.y = args[3]
 
         # Handle keyword arguments
         for key, value in kwargs.items():
             setattr(self, key, value)
 
+    def __str__(self):
+        """Return a string representation of the square."""
+        return "[Square] ({}) {}/{} - {}".format(self.id, self.x, self.y, self.width)
+
 
 if __name__ == "__main__":
-    pass
+    square = Square(5, 10, 15, 1)
+    print(square)
