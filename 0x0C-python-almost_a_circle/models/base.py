@@ -1,10 +1,9 @@
 #!/usr/bin/python3
-"""
-Updated class Base with added static method to_json_string
-"""
+"""Updated class Base"""
 
 
 import json
+import turtle
 
 
 class Base:
@@ -91,3 +90,34 @@ class Base:
         with open(filename, 'w', encoding='utf-8') as file:
             list_dicts = [obj.to_dictionary() for obj in list_objs] if list_objs is not None else []
             file.write(cls.to_json_string(list_dicts))
+
+    @staticmethod
+    def draw(list_rectangles, list_squares):
+        window = turtle.Screen()
+        window.bgcolor("white")
+        window.title("Turtle Drawing")
+
+        # Draw Rectangles
+        for rectangle in list_rectangles:
+            turtle.penup()
+            turtle.goto(rectangle.x, rectangle.y)
+            turtle.pendown()
+            turtle.forward(rectangle.width)
+            turtle.right(90)
+            turtle.forward(rectangle.height)
+            turtle.right(90)
+            turtle.forward(rectangle.width)
+            turtle.right(90)
+            turtle.forward(rectangle.height)
+            turtle.right(90)
+
+        # Draw Squares
+        for square in list_squares:
+            turtle.penup()
+            turtle.goto(square.x, square.y)
+            turtle.pendown()
+            for _ in range(4):
+                turtle.forward(square.size)
+                turtle.right(90)
+
+        turtle.exitonclick()
