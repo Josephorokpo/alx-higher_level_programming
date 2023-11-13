@@ -9,8 +9,8 @@ class TestSquareUpdateMethod(unittest.TestCase):
 
     def test_update_method_no_args(self):
         """
-        Test if update method does not modify attributes when
-        no arguments are provided.
+        Test if update method does not modify attributes
+        when no arguments are provided.
         """
         square = Square(5, 2, 3, 1)
         square.update()
@@ -46,13 +46,13 @@ class TestSquareUpdateMethod(unittest.TestCase):
         self.assertEqual(square.x, 2)
         self.assertEqual(square.y, 3)
 
-    def test_update_method_keyword_args(self):
+    def test_update_method_extra_args(self):
         """
-        Test if update method correctly updates attributes
-        with keyword arguments.
+        Test if update method ignores extra arguments
+        beyond the fourth argument.
         """
         square = Square(5, 2, 3, 1)
-        square.update(id=2, size=8, x=4, y=6)
+        square.update(2, 8, 4, 6, 99, "extra")
 
         self.assertEqual(square.id, 2)
         self.assertEqual(square.size, 8)
