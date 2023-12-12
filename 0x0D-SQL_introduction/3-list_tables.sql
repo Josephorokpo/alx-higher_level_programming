@@ -1,4 +1,7 @@
--- List all the tables of a database in your MySQL server.
+-- Task: List all tables in a specified MySQL database.
 
--- Try to list all tables in a database.
-SHOW TABLES FROM mysql;
+-- Use the specified database passed as an argument.
+USE mysql;
+
+-- List all tables in the selected database.
+SHOW TABLES;
