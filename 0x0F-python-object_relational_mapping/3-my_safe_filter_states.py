@@ -8,8 +8,6 @@ import MySQLdb
 import sys
 
 if __name__ == "__main__":
-
-    # Connect to MySQL server
     db = MySQLdb.connect(
         host="localhost",
         port=3306,
@@ -18,20 +16,16 @@ if __name__ == "__main__":
         db=sys.argv[3]
     )
 
-    # Create a cursor object
     cursor = db.cursor()
+    match = sys.argv[4]
 
-    # Execute the query with parameterized query to prevent MySQL injection
-    query = "SELECT * FROM states WHERE name LIKE BINARY '{}%' ORDER BY id ASC".format(sys.argv[4])
-    cursor.execute(query)
+    query = "SELECT * FROM states WHERE name LIKE %s"
+    cursor.execute(query, (match,))
 
-    # Fetch all the rows
     rows = cursor.fetchall()
 
-    # Display the results
     for row in rows:
         print(row)
 
-    # Close the cursor and connection
     cursor.close()
     db.close()
