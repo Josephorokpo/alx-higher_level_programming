@@ -20,7 +20,7 @@ if __name__ == "__main__":
     query = """
         SELECT cities.id, cities.name, states.name
         FROM cities
-        JOIN states ON cities.state_id = states.id
+        INNER JOIN states ON states.id = cities.state_id
         ORDER BY cities.id ASC
     """
     cursor.execute(query)
