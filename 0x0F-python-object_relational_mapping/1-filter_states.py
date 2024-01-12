@@ -8,10 +8,6 @@ import MySQLdb
 import sys
 
 if __name__ == "__main__":
-    # Check if all three arguments are provided
-    if len(sys.argv) != 4:
-        print("Usage: {} <username> <password> <database>".format(sys.argv[0]))
-        sys.exit(1)
 
     # Connect to MySQL server
     db = MySQLdb.connect(
