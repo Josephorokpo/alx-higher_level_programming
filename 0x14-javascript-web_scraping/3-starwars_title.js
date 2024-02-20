@@ -1,20 +1,16 @@
 #!/usr/bin/node
 
 const request = require('request');
-
 const movieId = process.argv[2];
-const url = `https://swapi-api.alx-tools.com/api/films/${movieId}`;
+const API_URL = 'https://swapi-api.hbtn.io/api/films/';
 
-request.get(url, (error, response, body) => {
+request(API_URL + movieId, (error, response, body) => {
   if (error) {
     console.error(error);
-    return;
+  } else if (response.statusCode === 200) {
+    const movieData = JSON.parse(body);
+    console.log(movieData.title);
+  } else {
+    console.error('Error code: ' + response.statusCode);
   }
-  if (response.statusCode !== 200) {
-    console.error(`Failed to fetch movie. Status code: ${response.statusCode}`);
-    return;
-  }
-
-  const movieData = JSON.parse(body);
-  console.log(`Title: ${movieData.title}`);
 });
